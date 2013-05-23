@@ -57,7 +57,9 @@ def build_pose( atom_objs ):
 
 if __name__ == '__main__':
 	data=[]
-	for line in open('/Users/Josh/Documents/pdb/1FOS_cln.pdb','r'):
+	path1='/Users/Josh/Documents/pdb/1FOS_cln.pdb'
+	path2='/Users/Josh/Downloads/1HGD.pdb'
+	for line in open(path2,'r'):
 		if line[0:4] != 'ATOM': continue
 		data.append( PDB_util.pdb2Atom(line) )
 			

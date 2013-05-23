@@ -12,7 +12,7 @@ class PDB( object ):
 		
 		print ("Read in pdb with " + str(len( self.__models.keys() )) + " models and chains " +
 		       str(self.__models[1].keys()) ) 	
-		print self.__header
+		#print self.__header
 
 	def __getitem__(self, model):
 		return self.__models[ model]

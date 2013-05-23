@@ -1,11 +1,12 @@
 import Atom, PDB_util
 from string import replace
 
-AA_3to1={ 'ALA':'A', 'CYS':'C', 'ASP':'D', 'GLU':'E', 'PHE':'F',
-          'HIS':'H', 'ILE':'I', 'LYS':'K', 'LEU':'L', 'MET':'M', 
-          'ASN':'N', 'PRO':'P', 'GLN':'Q', 'ARG':'R', 'SER':'S',
-	  'THR':'T', 'VAL':'V', 'TRP':'W', 'TYR':'Y', 'GLY':'G', 
+AA_3to1={ 'ALA':'A', 'ARG':'R', 'CYS':'C', 'ASP':'D', 'GLN':'Q',
+          'GLU':'E', 'GLY':'G', 'PHE':'F', 'HIS':'H', 'ILE':'I', 
+          'LYS':'K', 'LEU':'L', 'MET':'M', 'ASN':'N', 'PRO':'P',
+          'SER':'S', 'THR':'T', 'VAL':'V', 'TRP':'W', 'TYR':'Y',  
 	}
+
 DNA_3to1={ 'DA':'A' , 'DT':'T' , 'DG':'G' , 'DC':'C',
            'A':'A'  ,  'T':'T' , 'G':'G'  , 'C':'C'
 	 }   
