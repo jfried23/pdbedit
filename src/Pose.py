@@ -1,4 +1,5 @@
 from sys import exit
+from string import ascii_uppercase
 import PDB_util
 import Chain 
 
@@ -38,6 +39,15 @@ class Pose( object ):
 			self.__chains[ atm.chain ] = Chain.Chain( atm.chain )
 		self.__chains[ atm.chain ].add_atom( atm )
  
+	def add_chain( self, chain):
+		if chain.ID() not in self.__chains.keys():
+			self.__chains[ chain.ID ] = chain
+		else:
+			for letter in  ascii_uppercase:
+				if letter in self.__chains.keys(): continue
+					chain.set_ID( letter )
+					self.__chains[letter]=chain	 
+
 	def renumber( self, i=1 ):
 		for chain in self.__iter__():
 			i=chain.renumber(i)	
