@@ -45,8 +45,8 @@ class Pose( object ):
 		else:
 			for letter in  ascii_uppercase:
 				if letter in self.__chains.keys(): continue
-					chain.set_ID( letter )
-					self.__chains[letter]=chain	 
+				chain.set_ID( letter )
+				self.__chains[letter]=chain	 
 
 	def renumber( self, i=1 ):
 		for chain in self.__iter__():
