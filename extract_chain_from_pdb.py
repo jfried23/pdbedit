@@ -1,3 +1,11 @@
+from src import PDB
+from src import Pose
+from optparse import OptionParser
+
+optionparser = OptionParser()
+optionparser.add_option( '-p', '--pdbFile', default=None, help='path to pdb file.' )
+optionparser.add_option( '-v', '--exclude', default=None, help='Chains to exlude.' )
+optionparser.add_option( '-c', '--include', default=None, help='Chains to include.' )
 
 (opt,args) = optionparser.parse_args()
 
@@ -13,11 +21,28 @@ if ( (opt.exclude == None) and (opt.include == None ) ):
 	exit()
 
 
+
 poses = PDB.PDB( opt.pdbFile )
-for pose in poses:
-	if opt.exclude ! = None:  
-		
+if opt.exclude != None:   opt.exclude = set([ one for one in opt.exclude ])
+elif opt.include != None: opt.include = set([ one for one in opt.include ])	
 
-seq = pose[1].seq()
+final=PDB.PDB()
+for p in poses:
+	pose = Pose.Pose( p.model )	
+	if opt.exclude:  
+		for chain in p:
+			if chain.ID() in opt.exclude: continue
+			pose.add_chain( chain )
+	
+	elif opt.include:
+		for chain in p:
+			if chain.ID() not in opt.include: continue
+			pose.add_chain( chain )
+	pose.renumber()
+	final.add_pose(pose,p.model)
 
-print seq	
+
+print final			
+
+#seq = pose[1].seq()
+

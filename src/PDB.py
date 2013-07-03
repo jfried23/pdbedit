@@ -3,16 +3,21 @@ import Pose
 import PDB_util
 
 class PDB( object ):
-	def __init__(self, path):
+	def __init__(self, path = None):
 		self.__models={}
-		self.__inputFile = path
 		self.__header=''
-
-		self.read_pdb()
+		self.__inputFile = path
 		
-		print ("Read in pdb with " + str(len( self.__models.keys() )) + " models and chains " +
-		       str(self.__models[1].keys()) ) 	
-		#print self.__header
+		if path != None:
+			self.__inputFile = path
+			self.read_pdb()
+		
+			print ("Read in pdb with " + str(len( self.__models.keys() )) + " models and chains " +
+		       	str(self.__models[1].keys()) ) 	
+
+	def __iter__(self):
+		for modid in sorted(self.__models.keys()):
+        		yield self.__models[ modid ]
 
 	def __getitem__(self, model):
 		return self.__models[ model]
@@ -28,6 +33,9 @@ class PDB( object ):
 				data+= "\nENDMDL\n"
 		return data
 			
+	def add_pose(self, pose, modid = 1 ):
+		self.__models[modid] = pose
+		
 	def read_pdb(self):
 		model = 1
 		self.__models[ model ] = Pose.Pose( model )

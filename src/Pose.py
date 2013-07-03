@@ -6,7 +6,7 @@ import Chain
 
 class Pose( object ):
 	def __init__(self, model=1):
-		self.__model = model
+		self.model = model
 		self.__chains = {}
 
 	def __iter__(self):
