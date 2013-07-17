@@ -4,16 +4,13 @@ import PDB_util
 
 class PDB( object ):
 	def __init__(self, path = None):
-		self.__models={}
+		self.__models={ 1:Pose.Pose() }
 		self.__header=''
 		self.__inputFile = path
 		
 		if path != None:
 			self.__inputFile = path
 			self.read_pdb()
-		
-			print ("Read in pdb with " + str(len( self.__models.keys() )) + " models and chains " +
-		       	str(self.__models[1].keys()) ) 	
 
 	def __iter__(self):
 		for modid in sorted(self.__models.keys()):

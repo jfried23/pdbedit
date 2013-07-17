@@ -22,8 +22,8 @@ class Pose( object ):
 			ter = atom
 			ter.set_param('atm_type','TER')
 			ter.set_param('atm_name',' ')
-			data += PDB_util.Atom2pdb( atom )[0:26]
-		data += '\nEND'
+			data += PDB_util.Atom2pdb( atom )[0:26]+'\n'
+		data += 'END'
 		return data
 	
 	def __getitem__(self, chain):
@@ -41,12 +41,13 @@ class Pose( object ):
  
 	def add_chain( self, chain):
 		if chain.ID() not in self.__chains.keys():
-			self.__chains[ chain.ID ] = chain
+			self.__chains[ chain.ID() ] = chain
 		else:
 			for letter in  ascii_uppercase:
 				if letter in self.__chains.keys(): continue
 				chain.set_ID( letter )
-				self.__chains[letter]=chain	 
+				self.__chains[letter]=chain
+				break	 
 
 	def renumber( self, i=1 ):
 		for chain in self.__iter__():
@@ -58,6 +59,14 @@ class Pose( object ):
 			if i !=0: fasta+='\n\n'
 			fasta += '>' + ch.ID() +'\n' + ch.seq()
 		return fasta	
+
+	from numpy import array
+	def apply_rotation( self, RotMatrix, c0 = array( [0, 0, 0] ) ):
+		for chain in self.__iter__():
+			for resi in chain:
+				for atm in chain:
+					print RotMatrix * (atm.pos - c0)
+					
 
 def build_pose( atom_objs ):
 	pose = Pose()
